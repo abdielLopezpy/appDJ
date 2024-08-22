@@ -1,0 +1,56 @@
+<!-- templates/inventory/product_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6">Product Inventory</h1>
+        
+        <a href="{% url 'product_create' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add New Product</a>
+        
+        <div class="mt-6">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Name</th>
+                        <th class="py-3 px-6 text-left">Description</th>
+                        <th class="py-3 px-6 text-center">Price</th>
+                        <th class="py-3 px-6 text-center">Stock</th>
+                        <th class="py-3 px-6 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    {% for product in products %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ product.name }}</td>
+                        <td class="py-3 px-6 text-left">{{ product.description }}</td>
+                        <td class="py-3 px-6 text-center">{{ product.price }}</td>
+                        <td class="py-3 px-6 text-center">{{ product.stock }}</td>
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex item-center justify-center">
+                                <a href="{% url 'product_update' product.pk %}" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M17.414 2.586a2 2 0 010 2.828L7.828 15H5v-2.828l9.586-9.586a2 2 0 012.828 0zM3 17v-4h4l10-10 2 2-10 10H3z"/>
+                                    </svg>
+                                </a>
+                                <a href="{% url 'product_delete' product.pk %}" class="w-4 mr-2 transform hover:text-red-500 hover:scale-110">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8 9a1 1 0 012 0v5a1 1 0 01-2 0V9zM12 9a1 1 0 112 0v5a1 1 0 11-2 0V9z" clip-rule="evenodd"/>
+                                        <path fill-rule="evenodd" d="M5 4a2 2 0 00-2 2v1h14V6a2 2 0 00-2-2H5zm-1 4v9a2 2 0 002 2h8a2 2 0 002-2V8H4zm8-4a1 1 0 011-1h3a1 1 0 011 1v1H8V5a1 1 0 011-1h3z" clip-rule="evenodd"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
